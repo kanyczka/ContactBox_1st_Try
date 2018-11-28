@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Lista kontaktów</h3>
+    <p></p>
+
+<div style=>
+
+{% for p in people.all %}
+
+    <table class="table table-striped">
+		<tr>
+            <td width=50%><a href="{% url 'person_id' p.id %}">{{ p.name }} {{ p.surname }}</a></td>
+            <td width=25%><a class="btn btn-primary btn-sm" href="{% url 'modify' p.id %}" role="button">Edytuj</a></td>
+            <td width=25%><a class="btn btn-danger btn-sm" href="{% url 'delete' p.id %}" role="button">Usuń</a></td>
+		</tr>
+    </table>
+{% endfor %}
+    <p></p>
+
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+
+{#btn btn-danger#}
+
+

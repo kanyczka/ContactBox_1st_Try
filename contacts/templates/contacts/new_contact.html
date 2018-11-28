@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Dodaj osobę: </h2>
+    <p></p>
+
+<div style=>
+          <form action="{% url 'new' %}" method="POST">
+            {% csrf_token %}
+            <label>Imię: <input name="name" type="text" required></label>
+            <label>Nazwisko: <input name="surname" type="text" required></label>
+            <input type="submit" value="Zapisz kontakt">
+		</form>
+<p></p>
+    {% if msg %}
+        <h2>{{ msg }}</h2>
+    {% endif %}
+
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

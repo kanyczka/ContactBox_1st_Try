@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-right">{{ p.name }} {{ p.surname }}</h2>
+
+<div style=>
+          <form action="#" method="POST">
+              {% csrf_token %}
+                <fieldset style="background-color: whitesmoke">
+                  <legend>Podaj lub zmień adres:</legend>
+                     <label>Miasto: <input name="city" type="text" value={{ city }}></label>
+                     <label>Kod: <input name="city_code" type="text" placeholder="00-00" value={{ city_code }}></label>
+                      <br>
+                    <label>Ulica: <input name="street" type="text" value="{{ street }}"></label>
+                    <label>Numer domu: <input name="str_no" type="text" value="{{ str_no }}"></label>
+                    <label>Numer lokalu: <input name="number" type="text" value="{{ number }}"></label>
+                    <input class="btn btn-primary" type="submit" value="Zapisz">
+                </fieldset>
+                <p></p><br>
+
+
+                <fieldset style="background-color: whitesmoke">
+                  <legend>Dodaj numer telefonu:</legend>
+
+                    <label>Numer: <input name="tel_number" type="number"></label>
+                    <select name="tel_type" type="number">
+                        <option value="0">Prywatny</option>
+                        <option value="2">Służbowy</option>
+                    </select>
+                    <input class="btn btn-primary" type="submit" value="Zapisz">
+
+                </fieldset>
+                       <br>
+
+              {% if tel %}
+              <fieldset>
+                  <legend>Zapisane numery: <a class="btn btn-primary" href="../" role="button">Edytuj</a></legend>
+
+                  {% for t in tel %}
+                      <label>Numer: <input name="t_number" type="number" value={{ t.number }}></label>
+                      <input type="hidden" name="t_id" value={{ t.pk }}>
+                      <select name="t_type" type="number">
+                        <option value={{ t.type }}>{{ t.TYPE_CHOICES }}</option>     {# jak zrobić, żeby sam wybierał TYPE_CHOICES} #}
+{#                        <option value="1">Domowy</option>#}
+{#                        <option value="2">Służbowy</option>#}
+                      </select><br>
+                  {% endfor %}
+                </fieldset>
+              {% endif %}
+                    <br>
+
+                <fieldset style="background-color: whitesmoke">
+                  <legend>Dodaj Email:</legend>
+                    <label>e-mail: <input name="e_mail" type="text"></label>
+                    <select name="e_type" type="number">
+                        <option value="0">Prywatny</option>
+                        <option value="2">Służbowy</option>
+                    </select>
+                    <input class="btn btn-primary" type="submit" value="Zapisz">
+                </fieldset>
+                    <br>
+
+              {% if mail %}
+                <fieldset>
+                    <legend>Zapisane adresy email: <a class="btn btn-primary" href="../" role="button">Edytuj</a></legend>
+                    {% for e in mail %}
+                    <label>Email: <input name="e_mail" type="text" value={{ e.email }}></label>
+                    <input type="hidden" name="e_id" value={{ e.pk }}>
+                    <select name="e_type" type="number">
+                    <option value={{ t.type }}>{{ t.TYPE_CHOICES }}</option>     {# jak zrobić, żeby sam wybierał TYPE_CHOICES} #}
+                    {% endfor %}
+                    </select>
+                </fieldset>
+              {% endif %}
+		</form>
+
+<p></p>
+
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

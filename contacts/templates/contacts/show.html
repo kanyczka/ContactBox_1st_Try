@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-right">{{ p.name }} {{ p.surname }}
+<a class="btn btn-primary" href="{% url 'modify' p.id %}" role="button">Edytuj</a></h2>
+
+<div style=>
+          <form action="#" method="POST">
+              {% csrf_token %}
+                <fieldset style="background-color: whitesmoke">
+                  <legend>Adres:</legend>
+                     <label>Miasto: <input readonly value={{ city }}></label>
+                     <label>Kod: <input readonly value={{ city_code }}></label>
+                      <br>
+                    <label>Ulica: <input readonly value="{{ street }}"></label>
+                    <label>Numer domu: <input readonly value="{{ str_no }}"></label>
+                    <label>Numer lokalu: <input readonly value="{{ number }}"></label>
+                </fieldset>
+                <p></p>
+
+              {% if tel %}
+              <fieldset>
+                  <legend>Nr telefonów:</legend>
+                  {% for t in tel %}
+                      <label>Numer: <input readonly value={{ t.number }}></label>
+                      <select readonly>
+                      <option value={{ t.type }}>{{ tnumber.get_type_display }}</option>     {# jak zrobić, żeby sam wybierał TYPE_CHOICES} #}
+{#                        <option value="1">Domowy</option>#}
+{#                        <option value="2">Służbowy</option>#}
+                      </select><br>
+                  {% endfor %}
+                </fieldset>
+              {% endif %}
+                    <br>
+
+              {% if mail %}
+                <fieldset>
+                    <legend>Zapisane adresy email:</legend>
+                    {% for e in mail %}
+                        <label>Email: <input readonly value={{ e.email }}></label>
+                        <select readonly>
+                        <option value={{ t.type }}>{{ t.TYPE_CHOICES }}</option>     {# jak zrobić, żeby sam wybierał TYPE_CHOICES} #}
+                    {% endfor %}
+                    </select>
+                </fieldset>
+              {% endif %}
+		</form>
+
+<p></p>
+
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
